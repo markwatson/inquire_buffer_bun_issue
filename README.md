@@ -1,16 +1,20 @@
 # inquire_buffer_bun_issue
 
 ## Overview
+
 This is an example project to detect and issue with:
+
 - Bun.build (packager like webpack)
 - @protobufjs/inquire of the Buffer class
 
 This was found when attempting to use this stack:
+
 - Bun 1.2.20 (built for production)
 - @valkey/valkey-glide@2.0.1
 - Pulled in: protobufjs@7.5.4, @protobufjs/inquire@1.1.0
 
 The error when creating a Valkey Glide client was:
+
 ```
 65 |
 66 | /**
@@ -39,6 +43,15 @@ This appears to be an issue with how inquire tries to avoid bundlers
 & with how buffer is pulled in. A similar issue is
 [in this bun issue](https://github.com/oven-sh/bun/issues/14891).
 
+The ultimate problem appears to be that inquire does something like this:
+
+```javascript
+eval("quire".replace(/^/, "re"))
+> ReferenceError: require is not defined
+```
+
+Building with `format: "cjs",` seems to work if you then run `index.js` directly.
+
 ## Using
 
 To install dependencies:
@@ -58,6 +71,7 @@ bun run ./validate.ts
 ```
 
 Here is an example of what you will see if there's an error:
+
 ```
 23 |       return Buffer.prototype.utf8Write ? Buffer : null;
 24 |     } catch (e) {
@@ -76,6 +90,7 @@ Bun v1.2.20 (macOS arm64)
 ```
 
 If you run the code directly (not the built file), you get:
+
 ```
 bun run ./index.ts
 Worked and found buffer package. Got byte length: 10

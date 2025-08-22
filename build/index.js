@@ -26,6 +26,6 @@ var require_inquire_buffer_bun_issue = __commonJS((exports) => {
     }
   }();
   var len = util.Buffer.byteLength("test value");
-  console.log("Worked found buffer package. Got byte length: " + len);
+  console.log("Worked and found buffer package. Got byte length: " + len);
 });
 export default require_inquire_buffer_bun_issue();
