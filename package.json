@@ -1,0 +1,18 @@
+{
+  "name": "inquire_buffer_bun_issue",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@protobufjs/inquire": "1.1.0"
+  },
+  "run": {
+    "build": "bun ./build.ts"
+  }
+}
